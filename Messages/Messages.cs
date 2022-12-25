@@ -34,7 +34,7 @@
         }
         public class StatusMessage
         {
-            public const string CurrentStatus = "running on localhost";
+            public string CurrentStatus = "running on localhost";
             public string ServerName { get; set; }
             public string HostName { get; set; }
             public OperatingSystem OCVersion { get; set; }
@@ -43,7 +43,7 @@
         public class InfoMessage
         {
             public DateTime currentDateTime { get; set; }
-            public const string MethodsAndDescription =
+            public string MethodsAndDescription =
                 "Solve - converts a number from 10NS to numberSystem\n" +
                 "int numberSystem - number system to convert into\n" +
                 "int x - number to convert into NS\n" +
