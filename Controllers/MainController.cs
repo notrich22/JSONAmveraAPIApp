@@ -14,7 +14,7 @@ namespace JSONAmveraAPIApp.Controllers
         {
             ILogger logger = context.RequestServices.GetService<ILogger<Program>>();
             logger.LogInformation($"Path: /info  Time: {DateTime.Now.ToLongTimeString()}");
-
+            await context.Response.WriteAsJsonAsync(await logicService.GetServerInfo());
         }
         public async Task GetServerStatus(HttpContext context)
         {
