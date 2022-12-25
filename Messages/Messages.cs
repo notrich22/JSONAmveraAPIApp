@@ -44,10 +44,10 @@
         {
             public DateTime currentDateTime { get; set; }
             public const string MethodsAndDescription =
-                "" +
-                "" +
-                "" +
-                "";
+                "Solve - converts a number from 10NS to numberSystem\n" +
+                "int numberSystem - number system to convert into\n" +
+                "int x - number to convert into NS\n" +
+                "Status: provides server status";
         }
         public class ErrorMessage
         {
