@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace JSONAmveraAPIApp.Messages
+﻿namespace JSONAmveraAPIApp.Messages
 {
     public class Messages
     {
