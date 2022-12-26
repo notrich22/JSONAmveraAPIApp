@@ -2,7 +2,7 @@
 
 namespace JSONAmveraAPIApp.Services
 {
-    public class SolvationLogicService
+    public class ConverterLogicService
     {
         public ConvertOutputMessage Convert(ConvertInputMessage input, IBaseConverter converter)
         {

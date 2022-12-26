@@ -3,13 +3,14 @@ using static JSONAmveraAPIApp.Messages.Messages;
 
 namespace JSONAmveraAPIApp.Controllers
 {
-    public class SolvationController
+    public class ConverterController
     {
-        private SolvationLogicService logicService;
+        private ConverterLogicService logicService;
         private ILogger logger;
-        public SolvationController(SolvationLogicService logicService, ILogger logger)
+        public ConverterController(ConverterLogicService logicService, ILogger<ConverterController> logger)
         {
             this.logicService = logicService;
+            this.logger = logger;
         }
         public async Task Convert(HttpContext context)
         {
