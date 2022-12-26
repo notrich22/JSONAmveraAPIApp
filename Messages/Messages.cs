@@ -1,40 +1,46 @@
-﻿namespace JSONAmveraAPIApp.Messages
+﻿using Newtonsoft.Json;
+
+namespace JSONAmveraAPIApp.Messages
 {
     public class Messages
     {
-        public class CalcInputMessage
+        public class ConvertInputMessage
         {
-            public int NumberSystem { get; set; }
-            public int X { get; set; } //Number to convert
-            public CalcInputMessage(int numberSystem, int x)
+            public int FromBase { get; set; }
+            public int ToBase { get; set; }
+            public string Number { get; set; } //Number to convert
+            public ConvertInputMessage(string number, int fromBase, int toBase)
             {
-                NumberSystem = numberSystem;
-                X = x;
+                FromBase= fromBase;
+                ToBase= toBase;
+                Number = number;
             }
             public override string ToString()
             {
-                return $"Trying to convert {X} in {NumberSystem} Number system;";
+                return $"Trying to convert {Number} from {FromBase} Base in {ToBase} Base;";
             }
         }
-        public class CalcOutputMessage
+        public class ConvertOutputMessage
         {
-            public int NumberSystem { get; set; }
-            public int Num { get; set; }
+            public int FromBase { get; set; }
+            public int ToBase { get; set; }
+            public string Number { get; set; }
             public string Result { get; set; }
-            public CalcOutputMessage(int numberSystem, int num, string result)
+            public ConvertOutputMessage(string number, int fromBase, int toBase, string result)
             {
-                NumberSystem = numberSystem;
-                Num = num;
-                Result = result;
+                FromBase= fromBase;
+                ToBase= toBase;
+                Number = number;
+                Result= result;
             }
             public override string ToString()
             {
-                return $"{Num} in {NumberSystem} number system is: {Result}";
+                return $"{Number} converted from {FromBase} Base to {ToBase} Base is: {Result}";
             }
         }
         public class StatusMessage
         {
-            public string CurrentStatus = "running on localhost";
+            public const string CurrentStatus = "running on Amvera";
             public string ServerName { get; set; }
             public string HostName { get; set; }
             public OperatingSystem OCVersion { get; set; }
@@ -43,11 +49,17 @@
         public class InfoMessage
         {
             public DateTime currentDateTime { get; set; }
-            public string MethodsAndDescription =
-                "Solve - converts a number from 10NS to numberSystem\n" +
-                "int numberSystem - number system to convert into\n" +
-                "int x - number to convert into NS\n" +
-                "Status: provides server status";
+            public List<MethodDescription> MethodsAndDescription { 
+                get {
+                    return null;
+                } }
+        }
+        //TODO
+        public class MethodDescription
+        {
+            public string MethodName { get; set; }
+            public string MethodUrl { get; set; }
+            public string Description { get; set; }
         }
         public class ErrorMessage
         {

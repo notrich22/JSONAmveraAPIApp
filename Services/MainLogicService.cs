@@ -6,8 +6,7 @@ namespace JSONAmveraAPIApp.Services
     {
         public async Task<InfoMessage> GetServerInfo()
         {
-            InfoMessage info = new InfoMessage();
-            return info;
+            return new InfoMessage();
         }
         public async Task<StatusMessage> GetServerStatus()
         {
