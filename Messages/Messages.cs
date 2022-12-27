@@ -28,6 +28,12 @@
                 MethodName  = "Get requests",
                 MethodUrl = "/get-requests",
                 Description = "Provides a list of requests"
+            },
+            new MethodDescription()
+            {
+                MethodName  = "Get requests by host",
+                MethodUrl = "/get-requests-by-host",
+                Description = "Provides a list of requests by host. Parameter: (string)IP"
             }
         };
         public class ConvertInputMessage
