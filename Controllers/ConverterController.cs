@@ -31,10 +31,10 @@ namespace JSONAmveraAPIApp.Controllers
                     await context.Response.WriteAsJsonAsync(solvation);
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                logger.LogError($"Exception occured: {e.Message}: DateTime:{DateTime.Now.ToLongTimeString()}");
-                ErrorMessage error = new ErrorMessage($"Error during request processing: {e.Message}");
+                ErrorMessage error = new ErrorMessage(ex);
+                logger.LogError(error.ToString());
                 await context.Response.WriteAsJsonAsync(error);
             }
         }

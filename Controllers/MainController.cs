@@ -1,4 +1,5 @@
-﻿using JSONAmveraAPIApp.Services;
+﻿using JSONAmveraAPIApp.Model;
+using JSONAmveraAPIApp.Services;
 
 namespace JSONAmveraAPIApp.Controllers
 {
@@ -14,13 +15,13 @@ namespace JSONAmveraAPIApp.Controllers
 
         public async Task GetServerInfo(HttpContext context)
         {
-            logger.LogInformation($"Path: /info  Time: {DateTime.Now.ToLongTimeString()}");
             await context.Response.WriteAsJsonAsync(await logicService.GetServerInfo());
+            logger.LogInformation($"Path: /info  Time: {DateTime.Now.ToLongTimeString()}");
         }
         public async Task GetServerStatus(HttpContext context)
         {
-            logger.LogInformation($"Path: /status  Time: {DateTime.Now.ToLongTimeString()}");
             await context.Response.WriteAsJsonAsync(await logicService.GetServerStatus());
+            logger.LogInformation($"Path: /status  Time: {DateTime.Now.ToLongTimeString()}");
         }
     }
 }

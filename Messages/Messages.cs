@@ -61,14 +61,14 @@
         }
         public class ErrorMessage
         {
-            public string Error { get; set; }
-            public ErrorMessage(string error)
+            public Exception Error { get; set; }
+            public ErrorMessage(Exception ex)
             {
-                Error = error;
+                Error = ex;
             }
             public override string ToString()
             {
-                return Error;
+                return $"Exception occured: {Error.Message}: DateTime:{DateTime.Now.ToLongTimeString()}";
             }
         }
     }
