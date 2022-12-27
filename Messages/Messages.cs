@@ -2,6 +2,34 @@
 {
     public class Messages
     {
+        public record IPMessage(string IP);
+        private readonly static List<MethodDescription> methods = new List<MethodDescription>()
+        {
+            new MethodDescription()
+            {
+                MethodName = "Status",
+                MethodUrl = "/status",
+                Description = "Gets status of a server"
+            },
+            new MethodDescription()
+            {
+                MethodName  = "Convert",
+                MethodUrl = "/convert",
+                Description = "Converts value to another base. Parameters: (string)Number, (int)ToBase, (int)FromBase"
+            },
+            new MethodDescription()
+            {
+                MethodName  = "Get hosts",
+                MethodUrl = "/get-hosts",
+                Description = "Provides a list of hosts"
+            },
+            new MethodDescription()
+            {
+                MethodName  = "Get requests",
+                MethodUrl = "/get-requests",
+                Description = "Provides a list of requests"
+            }
+        };
         public class ConvertInputMessage
         {
             public int FromBase { get; set; }
@@ -46,10 +74,9 @@
         }
         public class InfoMessage
         {
-            public DateTime currentDateTime { get; set; }
             public List<MethodDescription> MethodsAndDescription { 
                 get {
-                    return null;
+                    return methods;
                 } }
         }
         //TODO

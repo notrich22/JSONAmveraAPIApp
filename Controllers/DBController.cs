@@ -9,27 +9,20 @@ namespace JSONAmveraAPIApp.Controllers
 {
     public class DBController
     {
+        private DBLogicService logicService;
         private ILogger<DBController> logger;
-        public DBController(ILogger<DBController> logger)
+        public DBController(ILogger<DBController> logger, DBLogicService logicService)
         {
             this.logger = logger;
+            this.logicService = logicService;
         }
 
         public async Task<bool> isUserNew(HttpContext context)
         {
             try
             {
-                using (var db =new PostgreSQLDBContext())
-                {
-                    foreach(var host in await db.KnownHosts.ToListAsync())
-                    {
-                        if(host.IP == context.Request.Headers.Host)
-                        {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
+                bool isNew = await logicService.isUserNew(context.Connection.RemoteIpAddress.ToString());
+                return isNew;
             }
             catch (Exception ex)
             {
@@ -38,50 +31,38 @@ namespace JSONAmveraAPIApp.Controllers
                 return false;
             }
         }
-        public async Task<KnownHost> AddHost(HttpContext context)
+        public async Task AddHost(HttpContext context)
         {
-            try { 
-                KnownHost host = new KnownHost
-                {
-                    HostName = "host",
-                    IP = context.Request.Headers.Host.ToString()
-                };
-                using (var db = new PostgreSQLDBContext())
-                {
-                    await db.KnownHosts.AddAsync(host);
-                    await db.SaveChangesAsync();
-                }
-                return host;
+            try {
+                await logicService.AddHost(context.Connection.RemoteIpAddress.ToString(), context.Request.Headers.UserAgent.ToString());
             }
             catch(Exception ex) {
                 ErrorMessage error = new ErrorMessage(ex);
                 logger.LogError(error.ToString());
-                return null;
             }
         }
-        public async Task<Request> AddRequest(HttpContext context)
+        public async Task AddRequest(HttpContext context)
         {
-            try { 
-                using (var db = new PostgreSQLDBContext())
-                {
-                    Request request = new Request()
-                    {
-                        KnownHost = await db.KnownHosts.FirstOrDefaultAsync(n => n.IP == context.Request.Headers.Host.ToString()),
-                        isHttps = context.Request.IsHttps,
-                        Path = context.Request.Path
-
-
-                    };
-            
-                    await db.Requests.AddAsync(request);
-                    await db.SaveChangesAsync();
-                    return request;
-                }
+            try {
+                logicService.AddRequest(context.Connection.RemoteIpAddress.ToString(), context.Request.IsHttps, context.Request.Path);
             }catch(Exception ex) { 
                 ErrorMessage error = new ErrorMessage(ex);
                 logger.LogError(error.ToString());
-                return null;
             }
+        }
+        public async Task GetHosts(HttpContext context)
+        {
+            await context.Response.WriteAsJsonAsync(await logicService.GetHosts());
+        }
+        public async Task GetRequests(HttpContext context)
+        {
+            await context.Response.WriteAsJsonAsync(await logicService.GetRequests());
+        }
+
+        public async Task GetRequestsByHost(HttpContext context)
+        {
+            IPMessage IP = await context.Request.ReadFromJsonAsync<IPMessage>();
+            await context.Response.WriteAsJsonAsync(await logicService.GetRequestsByHost(IP.IP));
         }
     }
 }
