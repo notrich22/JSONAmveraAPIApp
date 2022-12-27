@@ -22,11 +22,11 @@ namespace JSONAmveraAPIApp.Services
             }
         }
         //Host CRUD
-        public async Task<KnownHost> AddHost(string IP, string HostName)
+        public async Task<KnownHost> AddHost(string IP, string UserAgent)
         {
             KnownHost host = new KnownHost
             {
-                HostName = "host",
+                UserAgent = UserAgent,
                 IP = IP
             };
             using (var db = new PostgreSQLDBContext())
@@ -56,7 +56,7 @@ namespace JSONAmveraAPIApp.Services
             {
                 KnownHost oldHost = await db.KnownHosts.FirstOrDefaultAsync(n=>n.Id ==id);
                 oldHost.IP = host.IP;
-                oldHost.HostName = host.HostName;
+                oldHost.UserAgent = host.UserAgent;
                 await db.SaveChangesAsync();
                 return oldHost;
             }
