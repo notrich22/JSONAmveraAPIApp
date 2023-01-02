@@ -100,7 +100,7 @@ namespace JSONAmveraAPIApp.Services
         {
             using (var db = new PostgreSQLDBContext())
             {
-                Request oldRequest = await db.Requests.Include(n=>n.KnownHost).FirstOrDefaultAsync(n => n.Id == id);
+                Request oldRequest = await db.Requests.FirstOrDefaultAsync(n => n.Id == id);
                 oldRequest.KnownHost = request.KnownHost;
                 oldRequest.isHttps = request.isHttps;
                 oldRequest.Path = request.Path;
