@@ -48,8 +48,11 @@ namespace JSONAmveraAPIApp.Controllers
         public async Task AddRequest(HttpContext context)
         {
             try {
-                
-                logicService.AddRequest(context.Connection.RemoteIpAddress.ToString(), context.Request.IsHttps, context.Request.Path);
+                Request request = new Request();
+                request.KnownHost = await logicService.GetHostByÌP(context.Connection.RemoteIpAddress.ToString());
+                request.isHttps = context.Request.IsHttps;
+                request.Path = context.Request.Path;
+                logicService.AddRequest(request);
             }catch(Exception ex) { 
                 ErrorMessage error = new ErrorMessage(ex);
                 logger.LogError(error.ToString());

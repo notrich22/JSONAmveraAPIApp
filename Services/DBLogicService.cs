@@ -45,6 +45,13 @@ namespace JSONAmveraAPIApp.Services
                 return await db.KnownHosts.FirstOrDefaultAsync(n=>n.Id==id);
             }
         }
+        public async Task<KnownHost> GetHostByÌP(string IP)
+        {
+            using (var db = new PostgreSQLDBContext())
+            {
+                return await db.KnownHosts.FirstOrDefaultAsync(n=>n.IP==IP);
+            }
+        }
         public async Task<KnownHost> UpdateHost(int id, KnownHost host)
         {
             using (var db = new PostgreSQLDBContext())
@@ -65,17 +72,10 @@ namespace JSONAmveraAPIApp.Services
             }
         }
         //Request CRUD
-        public async Task<Request> AddRequest(string IP, bool isHttps, string Path)
+        public async Task<Request> AddRequest(Request request)
         {
             using (var db = new PostgreSQLDBContext())
             {
-                Request request = new Request()
-                {
-                    KnownHost = await db.KnownHosts.FirstOrDefaultAsync(n => n.IP == IP),
-                    isHttps = isHttps,
-                    Path = Path
-                };
-
                 await db.Requests.AddAsync(request);
                 await db.SaveChangesAsync();
                 return request;
