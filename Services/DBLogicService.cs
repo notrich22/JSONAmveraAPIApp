@@ -22,19 +22,14 @@ namespace JSONAmveraAPIApp.Services
             }
         }
         //Host CRUD
-        public async Task<KnownHost> AddHost(string IP, string UserAgent)
+        public async Task<KnownHost> AddHost(KnownHost knownHost)
         {
-            KnownHost host = new KnownHost
-            {
-                UserAgent = UserAgent,
-                IP = IP
-            };
             using (var db = new PostgreSQLDBContext())
             {
-                await db.KnownHosts.AddAsync(host);
+                await db.KnownHosts.AddAsync(knownHost);
                 await db.SaveChangesAsync();
+                return knownHost;
             }
-            return host;
         }
         public async Task<List<KnownHost>> GetHosts()
         {

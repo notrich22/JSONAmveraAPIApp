@@ -34,7 +34,11 @@ namespace JSONAmveraAPIApp.Controllers
         public async Task AddHost(HttpContext context)
         {
             try {
-                await logicService.AddHost(context.Connection.RemoteIpAddress.ToString(), context.Request.Headers.UserAgent.ToString());
+                KnownHost knownHost = new KnownHost() {
+                    IP= context.Connection.RemoteIpAddress.ToString(),
+                    UserAgent= context.Request.Headers.UserAgent.ToString()
+                };
+                await logicService.AddHost(knownHost);
             }
             catch(Exception ex) {
                 ErrorMessage error = new ErrorMessage(ex);
@@ -44,6 +48,7 @@ namespace JSONAmveraAPIApp.Controllers
         public async Task AddRequest(HttpContext context)
         {
             try {
+                
                 logicService.AddRequest(context.Connection.RemoteIpAddress.ToString(), context.Request.IsHttps, context.Request.Path);
             }catch(Exception ex) { 
                 ErrorMessage error = new ErrorMessage(ex);
