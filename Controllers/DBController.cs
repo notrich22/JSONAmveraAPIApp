@@ -52,7 +52,7 @@ namespace JSONAmveraAPIApp.Controllers
                 request.KnownHost = await logicService.GetHostByÌP(context.Connection.RemoteIpAddress.ToString());
                 request.isHttps = context.Request.IsHttps;
                 request.Path = context.Request.Path;
-                logicService.AddRequest(request);
+                logicService.AddRequest(request.KnownHost.IP, request);
             }catch(Exception ex) { 
                 ErrorMessage error = new ErrorMessage(ex);
                 logger.LogError(error.ToString());

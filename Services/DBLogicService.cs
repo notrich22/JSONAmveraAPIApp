@@ -72,13 +72,19 @@ namespace JSONAmveraAPIApp.Services
             }
         }
         //Request CRUD
-        public async Task<Request> AddRequest(Request request)
+        public async Task<Request> AddRequest(string IP, Request request)
         {
-            using (var db = new PostgreSQLDBContext())
-            {
-                await db.Requests.AddAsync(request);
-                await db.SaveChangesAsync();
-                return request;
+            try { 
+                using (var db = new PostgreSQLDBContext())
+                {
+                    request.KnownHost = await db.KnownHosts.FirstOrDefaultAsync(n => n.IP == IP);
+                    await db.Requests.AddAsync(request);
+                    await db.SaveChangesAsync();
+                    return request;
+                }
+            }catch(Exception ex) { 
+                Console.WriteLine(ex.ToString());
+                return null;
             }
         }
         
