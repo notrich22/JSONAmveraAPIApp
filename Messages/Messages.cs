@@ -43,9 +43,9 @@
             public string Number { get; set; } //Number to convert
             public ConvertInputMessage(string number, int fromBase, int toBase)
             {
-                FromBase= fromBase;
-                ToBase= toBase;
                 Number = number;
+                FromBase = fromBase;
+                ToBase= toBase;
             }
             public override string ToString()
             {

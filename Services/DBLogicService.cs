@@ -22,19 +22,14 @@ namespace JSONAmveraAPIApp.Services
             }
         }
         //Host CRUD
-        public async Task<KnownHost> AddHost(string IP, string HostName)
+        public async Task<KnownHost> AddHost(KnownHost knownHost)
         {
-            KnownHost host = new KnownHost
-            {
-                HostName = "host",
-                IP = IP
-            };
             using (var db = new PostgreSQLDBContext())
             {
-                await db.KnownHosts.AddAsync(host);
+                await db.KnownHosts.AddAsync(knownHost);
                 await db.SaveChangesAsync();
+                return knownHost;
             }
-            return host;
         }
         public async Task<List<KnownHost>> GetHosts()
         {
@@ -50,13 +45,20 @@ namespace JSONAmveraAPIApp.Services
                 return await db.KnownHosts.FirstOrDefaultAsync(n=>n.Id==id);
             }
         }
+        public async Task<KnownHost> GetHostByÌP(string IP)
+        {
+            using (var db = new PostgreSQLDBContext())
+            {
+                return await db.KnownHosts.FirstOrDefaultAsync(n=>n.IP==IP);
+            }
+        }
         public async Task<KnownHost> UpdateHost(int id, KnownHost host)
         {
             using (var db = new PostgreSQLDBContext())
             {
                 KnownHost oldHost = await db.KnownHosts.FirstOrDefaultAsync(n=>n.Id ==id);
                 oldHost.IP = host.IP;
-                oldHost.HostName = host.HostName;
+                oldHost.UserAgent = host.UserAgent;
                 await db.SaveChangesAsync();
                 return oldHost;
             }
@@ -70,17 +72,11 @@ namespace JSONAmveraAPIApp.Services
             }
         }
         //Request CRUD
-        public async Task<Request> AddRequest(string IP, bool isHttps, string Path)
+        public async Task<Request> AddRequest(string IP, Request request)
         {
             using (var db = new PostgreSQLDBContext())
             {
-                Request request = new Request()
-                {
-                    KnownHost = await db.KnownHosts.FirstOrDefaultAsync(n => n.IP == IP),
-                    isHttps = isHttps,
-                    Path = Path
-                };
-
+                request.KnownHost = await db.KnownHosts.FirstOrDefaultAsync(n => n.IP == IP);
                 await db.Requests.AddAsync(request);
                 await db.SaveChangesAsync();
                 return request;
@@ -105,7 +101,7 @@ namespace JSONAmveraAPIApp.Services
         {
             using (var db = new PostgreSQLDBContext())
             {
-                Request oldRequest = await db.Requests.Include(n=>n.KnownHost).FirstOrDefaultAsync(n => n.Id == id);
+                Request oldRequest = await db.Requests.FirstOrDefaultAsync(n => n.Id == id);
                 oldRequest.KnownHost = request.KnownHost;
                 oldRequest.isHttps = request.isHttps;
                 oldRequest.Path = request.Path;
