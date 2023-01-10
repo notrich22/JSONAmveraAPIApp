@@ -1,0 +1,12 @@
+C:\Users\NotRich22\Desktop\JsonAmveraConvertationApiApp\JsonAmveraConvertationApiApp\obj\Release\net7.0\PubTmp\Out\JsonAmveraConvertationApiApp.exe
+C:\Users\NotRich22\Desktop\JsonAmveraConvertationApiApp\JsonAmveraConvertationApiApp\obj\Release\net7.0\PubTmp\Out\appsettings.Development.json
+C:\Users\NotRich22\Desktop\JsonAmveraConvertationApiApp\JsonAmveraConvertationApiApp\obj\Release\net7.0\PubTmp\Out\appsettings.json
+C:\Users\NotRich22\Desktop\JsonAmveraConvertationApiApp\JsonAmveraConvertationApiApp\obj\Release\net7.0\PubTmp\Out\JsonAmveraConvertationApiApp.dll
+C:\Users\NotRich22\Desktop\JsonAmveraConvertationApiApp\JsonAmveraConvertationApiApp\obj\Release\net7.0\PubTmp\Out\JsonAmveraConvertationApiApp.runtimeconfig.json
+C:\Users\NotRich22\Desktop\JsonAmveraConvertationApiApp\JsonAmveraConvertationApiApp\obj\Release\net7.0\PubTmp\Out\JsonAmveraConvertationApiApp.pdb
+C:\Users\NotRich22\Desktop\JsonAmveraConvertationApiApp\JsonAmveraConvertationApiApp\obj\Release\net7.0\PubTmp\Out\Microsoft.EntityFrameworkCore.dll
+C:\Users\NotRich22\Desktop\JsonAmveraConvertationApiApp\JsonAmveraConvertationApiApp\obj\Release\net7.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\NotRich22\Desktop\JsonAmveraConvertationApiApp\JsonAmveraConvertationApiApp\obj\Release\net7.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\NotRich22\Desktop\JsonAmveraConvertationApiApp\JsonAmveraConvertationApiApp\obj\Release\net7.0\PubTmp\Out\Npgsql.dll
+C:\Users\NotRich22\Desktop\JsonAmveraConvertationApiApp\JsonAmveraConvertationApiApp\obj\Release\net7.0\PubTmp\Out\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\NotRich22\Desktop\JsonAmveraConvertationApiApp\JsonAmveraConvertationApiApp\obj\Release\net7.0\PubTmp\Out\JsonAmveraConvertationApiApp.deps.json

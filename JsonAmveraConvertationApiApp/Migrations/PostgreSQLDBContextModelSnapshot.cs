@@ -21,7 +21,7 @@ namespace JSONAmveraAPIApp.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("JSONAmveraAPIApp.Model.Entities.KnownHost", b =>
+            modelBuilder.Entity("JsonAmveraConvertationApiApp.Model.Entities.KnownHost", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace JSONAmveraAPIApp.Migrations
                     b.ToTable("KnownHosts");
                 });
 
-            modelBuilder.Entity("JSONAmveraAPIApp.Model.Entities.Request", b =>
+            modelBuilder.Entity("JsonAmveraConvertationApiApp.Model.Entities.Request", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -53,7 +53,15 @@ namespace JSONAmveraAPIApp.Migrations
                     b.Property<int>("KnownHostId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("LastUpdate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Time")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -67,9 +75,9 @@ namespace JSONAmveraAPIApp.Migrations
                     b.ToTable("Requests");
                 });
 
-            modelBuilder.Entity("JSONAmveraAPIApp.Model.Entities.Request", b =>
+            modelBuilder.Entity("JsonAmveraConvertationApiApp.Model.Entities.Request", b =>
                 {
-                    b.HasOne("JSONAmveraAPIApp.Model.Entities.KnownHost", "KnownHost")
+                    b.HasOne("JsonAmveraConvertationApiApp.Model.Entities.KnownHost", "KnownHost")
                         .WithMany()
                         .HasForeignKey("KnownHostId")
                         .OnDelete(DeleteBehavior.Cascade)

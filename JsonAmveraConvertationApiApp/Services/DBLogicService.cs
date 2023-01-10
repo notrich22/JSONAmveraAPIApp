@@ -76,6 +76,8 @@ namespace JsonAmveraConvertationApiApp.Services
                 using (var db = new PostgreSQLDBContext())
                 {
                     request.KnownHost = await db.KnownHosts.FirstOrDefaultAsync(n => n.IP == IP);
+                    request.Time = DateTime.Now.ToString();
+
                     await db.Requests.AddAsync(request);
                     await db.SaveChangesAsync();
                     return request;
@@ -104,6 +106,7 @@ namespace JsonAmveraConvertationApiApp.Services
                     oldRequest.KnownHost = await db.KnownHosts.FirstOrDefaultAsync(n => n.Id == request.KnownHost.Id);
                     oldRequest.isHttps = request.isHttps;
                     oldRequest.Path = request.Path;
+                    oldRequest.LastUpdate = DateTime.Now.ToString();
                     await db.SaveChangesAsync();
                     return oldRequest;
                 }
