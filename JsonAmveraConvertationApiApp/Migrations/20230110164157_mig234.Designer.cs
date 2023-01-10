@@ -2,6 +2,7 @@
 using JsonAmveraConvertationApiApp.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JSONAmveraAPIApp.Migrations
 {
     [DbContext(typeof(PostgreSQLDBContext))]
-    partial class PostgreSQLDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230110164157_mig234")]
+    partial class mig234
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,6 +57,7 @@ namespace JSONAmveraAPIApp.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("LastUpdateTime")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Path")
